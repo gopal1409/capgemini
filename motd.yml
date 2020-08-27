@@ -2,9 +2,14 @@
     -
         hosts: centos
         vars:
-            motd_centos: "welcome to centos"
+            motd_centos: "welcome to centos ansibl rock 1"
         tasks:
             - name: configure Motd(message of the day)
               copy:
-                content: Welcome to centos 
+                content: "{{ motd_centos }}"
                 dest: /etc/motd
+              notify: MOTD Changed
+        handlers:
+            - name: MOTD Changed 
+              debug:
+                msg: The motd has changed   
