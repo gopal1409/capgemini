@@ -1,16 +1,16 @@
 ---
     -
-        hosts: centos
+        hosts: centos,ubuntu
         vars:
-            motd_centos: "welcome to centos ansibl rock 1"
-            motd_ubuntu: "welcome to ubuntu ansible rock"
+            motd_centos: "welcome to centos ansibl rock 1\n"
+            motd_ubuntu: "welcome to ubuntu ansible rock\n"
         tasks:
             - name: configure Motd(message of the day)
               copy:
                 content: "{{ motd_centos }}"
                 dest: /etc/motd
               notify: MOTD Changed
-        when: ansible_distribution == "Centos"
+              when: ansible_distribution == "Centos"
         handlers:
             - name: MOTD Changed 
               debug:
@@ -22,7 +22,7 @@
                 content: "{{ motd_ubuntu }}"
                 dest: /etc/motd
               notify: MOTD Changed
-        when: ansible_distribution == "ubuntu"
+              when: ansible_distribution == "ubuntu"
         handlers:
             - name: MOTD Changed 
               debug:
