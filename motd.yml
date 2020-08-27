@@ -1,0 +1,10 @@
+---
+    -
+        hosts: centos
+        vars:
+            motd_centos: "welcome to centos"
+        tasks:
+            - name: configure Motd(message of the day)
+              copy:
+                content: Welcome to centos 
+                dest: /etc/motd
