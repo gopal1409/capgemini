@@ -17,7 +17,7 @@
                 msg: The motd has changed
         
         tasks:
-            - name: configure Motd(message of the day)
+            - name: configure Motd(message of the day for ubuntu)
               copy:
                 content: "{{ motd_ubuntu }}"
                 dest: /etc/motd
