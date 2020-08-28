@@ -23,7 +23,12 @@
               patch:
                 src: files/nginx.conf.centos.patch
                 dest: /etc/nginx/nginx.conf
-            - name: create an site-availability directory
+            - name: create an site-available directory
+              file:
+                path: /etc/nginx/sites-available
+                state: directory
+                
+            - name: create an site-enable directory
               file:
                 path: /etc/nginx/sites-enabled
                 state: directory
