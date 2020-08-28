@@ -9,15 +9,18 @@
                 update_cache: yes
                 state: latest
               when: ansible_distribution == 'CentOS'
-            - name: Install nginx centos
-              yum:
+            - name: install nginx
+              package:
                 name: nginx
+                state: latest
+            - name: install patch
+              yum:
+                name: patch
                 update_cache: yes
                 state: latest
               when: ansible_distribution == 'CentOS'
-            - name: install nginx in ubuntu
-              apt:
-                name: nginx
-                update_cache: yes
-                state: latest
-              when: ansible_distribution == 'Ubuntu'
+            - name: patch nginx.conf
+              patch:
+                src: files/nginx.conf.centos.patch
+                dest: /etc/nginx/nginx.conf
+              when: ansible_distribution == 'CentOS'
