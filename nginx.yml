@@ -61,6 +61,16 @@
       file:
         path: /usr/share/nginx/html
         state: directory
+    - name: Template index.html.j2 to index.html on Target
+      template:
+        src: templates/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+       
 
 # Three dots indicate the end of a YAML document
 ...
