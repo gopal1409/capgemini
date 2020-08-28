@@ -1,0 +1,23 @@
+---
+    -
+        hosts: centos,ubuntu
+
+        tasks:
+            - name: Install Epel
+              yum:
+                name: epel-release
+                update_cache: yes
+                state: latest
+            when: ansible_distribution == 'CentOS'
+            - name: Install nginx centos
+              yum:
+                name: nginx
+                update_cache: yes
+                state: latest
+            when: ansible_distribution == 'CentOS'
+            - name: install nginx in ubuntu
+              apt:
+                name: nginx
+                update_cache: yes
+                state: latest
+            when: ansible_distribution == 'Ubuntu'
