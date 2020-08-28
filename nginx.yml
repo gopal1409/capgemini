@@ -23,4 +23,20 @@
               patch:
                 src: files/nginx.conf.centos.patch
                 dest: /etc/nginx/nginx.conf
-              when: ansible_distribution == 'CentOS'
+            - name: create an site-availability directory
+              file:
+                path: /etc/nginx/sites-enabled
+                state: directory
+            - name: copy an defalt nginx-config
+              copy:
+                src: files/nginx-default.conf
+                dest: /etc/nginx/site-available/default
+            - name: symbolinc link
+              file:
+                src: /etc/nginx/site-available
+                dest: /etc/nginx/site-enable/default
+                state: link
+            - name: create nginx/directory
+              file:
+                path: /usr/share/nginx/html
+                state: directory
